@@ -1,0 +1,373 @@
+<div class="container-fluid" *ngIf="student">
+    <mat-toolbar color="primary" class="mt-1">
+        <mat-chip-list>
+            <mat-chip color="accent">{{student.class}}</mat-chip>
+        </mat-chip-list>
+        <span class="example-fill-remaining-space"></span>
+        <button mat-icon-button>
+            <mat-icon matBadge="3" matBadgeColor="accent">assignment_turned_in</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>message</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon matBadge="5" matBadgeColor="warn">local_phone</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Parental Control" >
+            <mat-icon matBadgeColor="success">supervisor_account</mat-icon>
+        </button> 
+    </mat-toolbar>
+    <mat-tab-group>
+        <mat-tab *ngFor="let subject of student.subjects" label="{{subject.name}}">
+            <div class="px-1 py-1">
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let exercise of subject.exercises" class="my-1">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Excercise {{exercise.name}}
+                            </mat-panel-title>
+                            <!--mat-panel-description class="row float-right" -->
+                            Submission Date : {{exercise.submissionDate | date }}  
+                            <!--/mat-panel-description-->
+                        </mat-expansion-panel-header>
+                        <!--
+                      <table class="table" cellpadding="0" cellspacing="0" >
+                        <tbody>
+                            <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                               <button class="float-right" mat-raised-button color="primary" (click)="showFileUpload.showUpload = true;">
+                                    <mat-icon>check</mat-icon> Turn In</button>
+                            </td> 
+                          </tr>
+                       
+                          <tr>
+                        
+                        <th scope="row"><a href="javascript:void(0)" style="cursor:pointer"
+                            (click)="downloadPdf('../../assets/pdf/bruchteil-muster.pdf','exerciseFromTeacher')">
+                            Exercise From Teacher.pdf
+                        </a></th>
+								      <td><button mat-icon-button (click)="openDoc('../../assets/pdf/bruchteil-muster.pdf')">
+                                        <mat-icon>visibility</mat-icon>
+                                    </button>
+                                    <button mat-icon-button
+                                        (click)="downloadPdf('../../assets/pdf/bruchteil-muster.pdf','exerciseFromTeacher')">
+                                        <mat-icon>get_app</mat-icon>
+                                    </button>  
+                                </td>
+								      <td><button type="button" class="btn btn-submit" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Submit Exercise</button>
+								      	
+								      </td>
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            -->
+
+                        <div class="container-fluid">
+                            <div style="margin-top:5px;" class="row">
+                                <div class="col">
+                                </div>
+                                <div class="col">
+                                    <button class="float-right" mat-raised-button color="primary"
+                                        (click)="showFileUpload.showUpload = true;">
+                                        <mat-icon>check</mat-icon> Turn In
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:15px; background-color:lightgrey" class="row">
+                                <div class="col col-md-6">
+                                    <a href="javascript:void(0)" style="cursor:pointer"
+                                        (click)="downloadPdf('../../assets/pdf/bruchteil-muster.pdf','exerciseFromTeacher')">
+                                        Exercise From Teacher.pdf
+                                    </a>
+                                </div>
+                                <div class="col col-md-2">
+                                    <button mat-icon-button (click)="openDoc('../../assets/pdf/bruchteil-muster.pdf')">
+                                        <mat-icon>visibility</mat-icon>
+                                    </button>
+                                    <button mat-icon-button
+                                        (click)="downloadPdf('../../assets/pdf/bruchteil-muster.pdf','exerciseFromTeacher')">
+                                        <mat-icon>get_app</mat-icon>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button mat-raised-button color="primary"
+                                        (click)="showFileUpload.showUpload = true;">
+                                        <mat-icon>publish</mat-icon>Submit
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="margin-top:2px;" class="row">
+                                <div class="col-1"></div>
+                                <div class="col-5">
+                                    <a href="javascript:void(0)" style="cursor:pointer"
+                                        (click)="downloadPdf('../../assets/pdf/completedExercise.pdf','Turned In')">
+                                        Completed Exercise.pdf
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <button mat-icon-button (click)="openDoc('../../assets/pdf/completedExercise.pdf')">
+                                        <mat-icon>visibility</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="margin-top:2px;" class="row">
+                                <div class="col">
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="row" *ngIf="showFileUpload.showUpload">
+                                        <ol>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                    aria-describedby="inputGroupFileAddon01" color="primary">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose
+                                                    file</label>
+                                            </div>
+                                            <button mat-raised-button mr-25 matTooltip='Cancel Upload' color="primary"
+                                                (click)="showFileUpload.showUpload = false">
+                                                <mat-icon>cancel</mat-icon> Cancel
+                                            </button>
+                                            <button mat-raised-button color="primary"
+                                                (click)="showFileUpload.showUpload = false"
+                                                matTooltip='Upload selected file'>
+                                                <mat-icon>cloud_upload</mat-icon> Upload
+                                            </button>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top:15px; background-color:lightgrey" class="row">
+                                <div class="col col-md-6">
+                                    <a href="javascript:void(0)" style="cursor:pointer"
+                                        (click)="downloadPdf('../../assets/pdf/bruchteil-muster.pdf','exerciseFromTeacher')">
+                                        Exercise-2 From Teacher.pdf
+                                    </a>
+                                </div>
+                                <div class="col col-md-2">
+                                    <button mat-icon-button (click)="openDoc('../../assets/pdf/bruchteil-muster.pdf')">
+                                        <mat-icon>visibility</mat-icon>
+                                    </button>
+                                    <button mat-icon-button
+                                        (click)="downloadPdf('../../assets/pdf/bruchteil-muster.pdf','exerciseFromTeacher')">
+                                        <mat-icon>get_app</mat-icon>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button mat-raised-button color="primary"
+                                        (click)="showFileUpload.showUpload = true;">
+                                        <mat-icon>publish</mat-icon>Submit
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="margin-top:5px;" class="row">
+                                <div class="col">
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="row" *ngIf="showFileUpload.showUpload">
+                                        <ol>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                    aria-describedby="inputGroupFileAddon01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose
+                                                    file</label>
+                                            </div>
+                                            <button mat-raised-button matTooltip='Cancel Upload' color="primary"
+                                                (click)="showFileUpload.showUpload = false">
+                                                <mat-icon>cancel</mat-icon> Cancel
+                                            </button>
+                                            <button mat-raised-button color="primary"
+                                                (click)="showFileUpload.showUpload = false"
+                                                matTooltip='Upload selected file'>
+                                                <mat-icon>cloud_upload</mat-icon> Upload
+                                            </button>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:15px;" class="row">
+                                <div class="col col-md-6">
+                                    <app-video [videoId]="exercise.videoUrl"></app-video>
+                                </div>
+                                <div class="col">
+                                    <div class="btn-group">
+                                        <button mat-raised-button color="primary"
+                                            (click)="showQuestionDialog.showQ = true;">
+                                            <mat-icon>help</mat-icon> Ask a question
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top:15px;" class="row">
+                                <div class="col">
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="row" *ngIf="showQuestionDialog.showQ">
+                                        <button mat-raised-button matTooltip='Type your question' color="primary"
+                                            (click)="showQuestionDialog.showQ = false">
+                                            Chat</button>
+                                        <button mat-raised-button color="primary"
+                                            (click)="showQuestionDialog.showQ = false"
+                                            matTooltip='Record your question'>
+                                            Record</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top:15px;" class="row">
+                                <div class="col">
+                                    <mat-card>
+                                        <mat-card-header>
+                                        <mat-card-title> Question and Answers</mat-card-title>
+                                    </mat-card-header>
+                                        <!--From Student-->
+                                        <div style="background-color:lightgrey" class="row">
+                                            <div class="col">
+                                                <a href="javascript:void(0)" style="cursor:pointer">Your Question.wav</a>
+                                            </div>
+                                            <div class="col">
+                                                <button mat-icon-button matTooltip='View your Question'>
+                                                    <mat-icon>play_circle_filled</mat-icon>
+                                                </button>
+                                                <button mat-icon-button matTooltip='Delete your Question'>
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!--From Teacher-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <a href="javascript:void(0)" style="cursor:pointer">Reply from teacher.wav</a>
+                                            </div>
+                                            <div class="col">
+                                                <button mat-icon-button matTooltip='View Teachers Reply'>
+                                                    <mat-icon>play_circle_filled</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                       <!--From Student-->
+                                       <div style="background-color:lightgrey" class="row">
+                                        <div class="col">
+                                            <a href="javascript:void(0)" style="cursor:pointer">Your Question.wav</a>
+                                        </div>
+                                        <div class="col">
+                                            <button mat-icon-button matTooltip='View your Question'>
+                                                <mat-icon>play_circle_filled</mat-icon>
+                                            </button>
+                                            <button mat-icon-button matTooltip='Delete your Question'>
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!--From Teacher-->
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="javascript:void(0)" style="cursor:pointer">Reply from teacher.wav</a>
+                                        </div>
+                                        <div class="col">
+                                            <button mat-icon-button matTooltip='View Teachers Reply'>
+                                                <mat-icon>play_circle_filled</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                       <!--From Student-->
+                                        <div style="background-color:lightgrey" class="row">
+                                            <div class="col">
+                                                <a href="javascript:void(0)" style="cursor:pointer">Your Question.wav</a>
+                                            </div>
+                                            <div class="col">
+                                                <button mat-icon-button matTooltip='View your Question'>
+                                                    <mat-icon>play_circle_filled</mat-icon>
+                                                </button>
+                                                <button mat-icon-button matTooltip='Delete your Question'>
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!--From Teacher-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <a href="javascript:void(0)" style="cursor:pointer">Reply from teacher.wav</a>
+                                            </div>
+                                            <div class="col">
+                                                <button mat-icon-button matTooltip='View Teachers Reply'>
+                                                    <mat-icon>play_circle_filled</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                       <!--From Student-->
+                                       <div style="background-color:lightgrey" class="row">
+                                        <div class="col">
+                                            <a href="javascript:void(0)" style="cursor:pointer">Your Question.wav</a>
+                                        </div>
+                                        <div class="col">
+                                            <button mat-icon-button matTooltip='View your Question'>
+                                                <mat-icon>play_circle_filled</mat-icon>
+                                            </button>
+                                            <button mat-icon-button matTooltip='Delete your Question'>
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!--From Teacher-->
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="javascript:void(0)" style="cursor:pointer">Reply from teacher.wav</a>
+                                        </div>
+                                        <div class="col">
+                                            <button mat-icon-button matTooltip='View Teachers Reply'>
+                                                <mat-icon>play_circle_filled</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                            </mat-card>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        
+                            <!-- <div class="col-lg-4 col-sm-12 col-xs-12">
+                                <div class="row float-right">
+                                    Submission Date : {{exercise.submissionDate | date }}</div>
+                            </div> -->
+                        
+
+
+                        <!-- Video thumbnail popup modal START-->
+                        <!--
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 mb-4">
+                              <a><img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg" alt="video" (click)="videoModal1.show()"></a>
+                            </div>
+                        </div>          
+                        <div mdbModal #videoModal1="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myVideoModal1Label"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body mb-0 p-0">
+                                        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/wTcNtgA6gHs" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+                        <!-- Video thumbnail popup modal END-->
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

@@ -1,0 +1,23 @@
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+  .mt-4{
+    margin-top: 10em;
+  }
+
+  .c > div {
+    padding: 1em;
+  }
+  
+  @media screen and (min-width: 31.42em) {
+    .c2, .c3 {
+      float: left;
+      width: 50%;
+    }
+    .c4 {
+      float: right;
+      width: 50%;
+    }
+  }
+  
